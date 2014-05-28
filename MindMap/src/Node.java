@@ -1,64 +1,30 @@
 import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.Point;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
 
 import javax.swing.JLabel;
-import javax.swing.event.AncestorListener;
 
-class Node extends JLabel implements MouseMotionListener, MouseListener{
-	public Node(){
-		this.setSize(100, 30);
-		this.setOpaque(true);
-		this.setBackground(Color.CYAN);
-		this.setText("MindMapNode");
-//		this.addMouseListener(this);
-//		this.addMouseMotionListener(this);
+class Node extends JLabel{	
+	private final static int DEFAULT_NODE_SIZE_X = 100;
+	private final static int DEFAULT_NODE_SIZE_Y = 30;
+	private NodeDTO matchedNodeDTO;
+	
+	public Node(Point p, Dimension d, NodeDTO matchedNodeDTO){
+		setBounds(p.x, p.y, d.width, d.height);
+		setOpaque(true);
+		setBackground(Color.CYAN);
+		setText("MindMapNode");
+		this.matchedNodeDTO = matchedNodeDTO;
 	}
-
-	@Override
-	public void mouseDragged(MouseEvent e) {
-
+	
+	public Node(NodeDTO matchedNodeDTO){
+		this(new Point(0, 0), new Dimension(DEFAULT_NODE_SIZE_X, DEFAULT_NODE_SIZE_Y), matchedNodeDTO);
 	}
-
-	@Override
-	public void mouseMoved(MouseEvent e) {
-		// TODO Auto-generated method stub
-		setText(e.getX() + ", " + e.getY());
-	}
-
-	@Override
-	public void mouseClicked(MouseEvent arg0) {
-		// TODO Auto-generated method stub
-		if(arg0.getButton() == arg0.BUTTON1){
-			System.out.println("left button clicked");
-		}
-		else if(arg0.getButton() == arg0.BUTTON3){
-			System.out.println("right button clicked");
-		}
-	}
-
-	@Override
-	public void mouseEntered(MouseEvent arg0) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void mouseExited(MouseEvent arg0) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void mousePressed(MouseEvent arg0) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void mouseReleased(MouseEvent arg0) {
-		// TODO Auto-generated method stub
-		
+	
+	public NodeDTO getMatchNodeDTO(){
+		return matchedNodeDTO;
 	}
 }

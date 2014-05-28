@@ -8,12 +8,14 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 
-public class PreferencePane extends JPanel implements ActionListener{
+public class PreferencePane extends JPanel{
+	Controller controller;
 	JTextField txtPoints;
 	JTextField txtSize;
 	JTextField txtText;
 	
-	public PreferencePane(){
+	public PreferencePane(Controller controller){
+		this.controller = controller;
 		setLayout(null);
 		//this.setSize(175, 500);
 		JLabel label = new JLabel("좌표");
@@ -45,18 +47,9 @@ public class PreferencePane extends JPanel implements ActionListener{
 		
 		JButton button = new JButton("적용");
 		button.setBounds(label.getX(), lblNewLabel.getY() + lblNewLabel.getHeight() + 10, 75, 29);
-		button.addActionListener(this);
+		button.addActionListener(controller);
 		add(button);
 		
 		this.setPreferredSize(new Dimension(175, 200));
-	}
-
-	@Override
-	public void actionPerformed(ActionEvent e) {
-		// TODO Auto-generated method stub
-		if(e.getActionCommand().equals("적용")){
-			// 컨트롤러에 값변경을 알림...
-			System.out.println("적용...");
-		}
 	}
 }

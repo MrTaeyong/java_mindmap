@@ -1,7 +1,7 @@
 
 public class Main {
-	Model mindMapModel = new Model();
-	View mindMapView = new View();
-	Controller mindMapController = new Controller(mindMapModel, mindMapView);
+	public static void main(String[] args) {
+		Controller mindMapController = new Controller();
+	}
 	
 }

@@ -1,46 +1,52 @@
 import java.util.Vector;
 
 public class NodeDTO {
+	private final static int DEFAULT_NODE_SIZE_X = 100;
+	private final static int DEFAULT_NODE_SIZE_Y = 30;
+	
 	private int x, y;
-	private double width, height;
+	private int width, height;
 	private String text;
 	private int level;
+	private NodeDTO parent;
 	private Vector<NodeDTO> reference;
 	
-	public NodeDTO(int x, int y, double width, double height){
+	public NodeDTO(int x, int y, int width, int height, NodeDTO parent){
 		this.x = x; this.y = y;
 		this.width = width; this.height = height;
+		this.parent = parent;
+		this.reference = new Vector<NodeDTO>();
+	}
+	
+	public NodeDTO(NodeDTO parent){
+		this(0, 0, DEFAULT_NODE_SIZE_X, DEFAULT_NODE_SIZE_Y, parent);
 	}
 
+	public void setLocation(int x, int y){
+		this.x = x;
+		this.y = y;
+	}
 	public int getX() {
 		return x;
-	}
-
-	public void setX(int x) {
-		this.x = x;
 	}
 
 	public int getY() {
 		return y;
 	}
 
-	public void setY(int y) {
-		this.y = y;
-	}
-
-	public double getWidth() {
+	public int getWidth() {
 		return width;
 	}
 
-	public void setWidth(double width) {
+	public void setWidth(int width) {
 		this.width = width;
 	}
 
-	public double getHeight() {
+	public int getHeight() {
 		return height;
 	}
 
-	public void setHeight(double height) {
+	public void setHeight(int height) {
 		this.height = height;
 	}
 
@@ -52,5 +58,11 @@ public class NodeDTO {
 		this.text = text;
 	}
 	
+	public void setReference(NodeDTO node){
+		reference.add(node);
+	}
+	public Vector<NodeDTO> getReference(){
+		return reference;
+	}
 	
 }
