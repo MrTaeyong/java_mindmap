@@ -16,7 +16,7 @@ class Node extends JLabel{
 		setBounds(p.x, p.y, d.width, d.height);
 		setOpaque(true);
 		setBackground(Color.CYAN);
-		setText("MindMapNode");
+		setText(matchedNodeDTO.getText());
 		this.matchedNodeDTO = matchedNodeDTO;
 	}
 	

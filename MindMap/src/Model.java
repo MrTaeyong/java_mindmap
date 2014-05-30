@@ -15,6 +15,6 @@ public class Model {
 	}
 	
 	public void addNode(NodeDTO parent){
-		parent.setReference(new NodeDTO(parent));
+		parent.setChild(new NodeDTO(parent));
 	}
 }

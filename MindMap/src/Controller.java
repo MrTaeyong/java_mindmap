@@ -40,21 +40,9 @@ public class Controller implements ActionListener, MouseMotionListener, MouseLis
 				// 새로운 노드를 생성
 				NodeDTO newNode = new NodeDTO(eventNode.getMatchNodeDTO());
 				mindMapView.mindMapPanel.addNode(new Node(newNode), this);
-				eventNode.getMatchNodeDTO().setReference(newNode);
-				mindMapView.mindMapPanel.drawLines(mindMapModel.getRoot());
-//				int halfOfNodeX = (eventNode.getWidth() - eventNode.getX()) / 2;
-//				int midPointOfNodeX = eventNode.getX() + halfOfNodeX;
-//				System.out.println(eventNode.getX() + ", " + midPointOfNodeX);
-//				Point startPoint = new Point(midPointOfNodeX, eventNode.getY());
-//				halfOfNodeX = (newNode.getWidth() - newNode.getX()) / 2;
-//				midPointOfNodeX = newNode.getX() + halfOfNodeX;
-//				System.out.println(newNode.getX() + ", " + midPointOfNodeX);
-//				Point endPoint = new Point(midPointOfNodeX, newNode.getY());
-//				
-//				Graphics g = mindMapView.mindMapPanel.getGraphics();
-//				g.setColor(Color.WHITE);
-//				g.drawLine(startPoint.x, startPoint.y, endPoint.x, endPoint.y);
-//				mindMapView.mindMapPanel.repaint();
+				eventNode.getMatchNodeDTO().setChild(newNode);
+
+				mindMapView.mindMapPanel.repaint();
 			}
 		}
 	}
@@ -99,7 +87,17 @@ public class Controller implements ActionListener, MouseMotionListener, MouseLis
 	@Override
 	public void mouseReleased(MouseEvent e) {
 		// TODO Auto-generated method stub
-		
+		Node eventNode;
+		if(e.getSource() instanceof Node){
+			eventNode = (Node) e.getSource();
+			NodeDTO matchedNodeDTO = eventNode.getMatchNodeDTO();
+			matchedNodeDTO.setLocation(eventNode.getX(), eventNode.getY());
+			matchedNodeDTO.setMidPoint();
+			mindMapView.prefPanel.txtPoints.setText(matchedNodeDTO.x + ", " + matchedNodeDTO.y);
+			mindMapView.prefPanel.txtSize.setText(matchedNodeDTO.width + ", " + matchedNodeDTO.height);
+			mindMapView.prefPanel.txtText.setText(matchedNodeDTO.getText());
+		}
+		mindMapView.mindMapPanel.repaint();
 	}
 
 	@Override
